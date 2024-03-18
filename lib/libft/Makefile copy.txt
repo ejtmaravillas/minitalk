@@ -1,0 +1,38 @@
+NAME=getnextline.a
+
+CFLAGS= -Wall -Werror -Wextra
+
+CC= cc
+
+SRCS=  get_next_line.c get_next_line_utils.c
+
+BONUS_C= get_next_line_bonus.c get_next_line_utils_bonus.c
+
+OBJS= $(SRCS:.c=.o)
+
+BOBJS= $(BONUS_C:.c=.o)
+
+RM= rm -f
+
+LB= ar rcs
+
+all:	$(NAME)
+
+$(NAME): $(OBJS)
+	@$(LB) $(NAME) $(OBJS)
+
+bonus: $(OBJS) $(BOBJS)
+	$(LB) $(NAME) $(BOBJS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+clean:
+	$(RM) $(OBJS) $(BOBJS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re:	fclean all
+
+.PHONY: all bonus clean fclean re
