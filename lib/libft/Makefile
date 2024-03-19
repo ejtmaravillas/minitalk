@@ -13,7 +13,7 @@ SRCS=  ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c f
 		 ft_printpercent.c ft_print_prefix.c ft_print_s.c ft_print_p.c\
 		 ft_print_c.c ft_printf.c ft_print_numbase.c ft_strlen.c ft_strnstr.c\
 		 ft_strncmp.c ft_checkerror.c ft_checkerror_malloc.c ft_print_checkspace.c\
-		 ft_getprintlength.c ft_get_args.c
+		 ft_getprintlength.c ft_get_args.c ft_handle_errors.c
 
 BONUS_C= ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstadd_back.c \
 		 ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c \

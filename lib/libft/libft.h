@@ -6,7 +6,7 @@
 /*   By: emaravil <emaravil@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:38:45 by emaravil          #+#    #+#             */
-/*   Updated: 2023/12/25 19:24:08 by emaravil         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:40:19 by emaravil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 
+void	handle_errors(char *error_msg);
 #endif //LIBFT_H
