@@ -6,17 +6,11 @@
 /*   By: emaravil <emaravil@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:38:48 by emaravil          #+#    #+#             */
-/*   Updated: 2024/03/19 21:30:08 by emaravil         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:30:17 by emaravil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libft/libft.h"
-#include <signal.h>
-
-void	send_message(pid_t server_pid, unsigned char c);
-void	signal_init(void);
-void	check_input(int argc, char **argv);
-void	sig_handler(int signum);
+#include "minitalk.h"
 
 int	main(int argc, char **argv)
 {
@@ -54,6 +48,7 @@ void	send_message(pid_t server_pid, unsigned char c)
 void	check_input(int argc, char **argv)
 {
 	int	i;
+	int	server_pid;
 
 	i = 0;
 	if (argc != 3)
@@ -61,6 +56,11 @@ void	check_input(int argc, char **argv)
 	while (argv[1][i])
 		if (!ft_isdigit(argv[1][i++]))
 			handle_errors("Invalid PID");
-	if (*argv[2] == 0)
+	if (*argv[2] == 0 || (ft_strlen(argv[2]) == 0))
 		handle_errors("Empty message input");
+	server_pid = ft_atoi(argv[1]);
+	if (server_pid < 2 || server_pid > 99998)
+		handle_errors("PID out of range - [2, 99998]");
+	if (kill(server_pid, 0) == -1)
+		handle_errors("No process for the given PID");
 }

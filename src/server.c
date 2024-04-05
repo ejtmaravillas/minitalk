@@ -6,24 +6,20 @@
 /*   By: emaravil <emaravil@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:42:11 by emaravil          #+#    #+#             */
-/*   Updated: 2024/03/19 21:13:50 by emaravil         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:24:10 by emaravil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/libft/libft.h"
-#include <signal.h>
-
-void	signal_init(void);
-void	handle_sigusr(int signum, siginfo_t *info, void *ucontent);
+#include "minitalk.h"
 
 int	main(void)
 {
 	pid_t	server_pid;
 
 	server_pid = getpid();
-	ft_printf("SERVER PID: %d\n", server_pid);
-	ft_printf("FETCHING MESSAGE...\n\n");
-	ft_printf("------------- MESSAGE POLL ------------\n\n");
+	ft_printf("\nUSE CASE: ./client <SERVER_PID> <MESSAGE>\n");
+	ft_printf("\nSERVER PID: %d\n", server_pid);
+	ft_printf("\nFETCHING MESSAGE...\n");
 	signal_init();
 	while (1)
 		pause();
@@ -34,7 +30,7 @@ void	signal_init(void)
 {
 	struct sigaction	sa_newsig;
 
-	sa_newsig.sa_sigaction = &handle_sigusr;
+	sa_newsig.sa_sigaction = &handle_signal;
 	sa_newsig.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa_newsig, NULL) == -1)
 		handle_errors("Failed to get SIGUSR1's handler");
@@ -42,7 +38,7 @@ void	signal_init(void)
 		handle_errors("Failed to get SIGUSR2's handler");
 }
 
-void	handle_sigusr(int signum, siginfo_t *info, void *ucontent)
+void	handle_signal(int signum, siginfo_t *info, void *ucontent)
 {
 	static int				bits_count = -1;
 	static unsigned char	c;
